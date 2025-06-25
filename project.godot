@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Zeit"
+run/main_scene=""
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
 
 [display]
 
@@ -22,3 +27,4 @@ window/size/viewport_height=720
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.529, 0.808, 0.922, 1)

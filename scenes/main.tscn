@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8vhxkl2q3d4p"]
+
+[ext_resource type="PackedScene" uid="uid://b2xkqvm5f4d8w" path="res://scenes/ui.tscn" id="2_1xvbq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.8, 0.2, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 10, 10)
+projection = 1
+size = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+size = Vector3(50, 0.1, 50)
+material = SubResource("StandardMaterial3D_1")
+
+[node name="UI" parent="." instance=ExtResource("2_1xvbq")]

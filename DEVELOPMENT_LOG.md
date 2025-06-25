@@ -57,3 +57,44 @@
 - 3Dアイソメトリック視点
 - Kenney City Kit Industrialのアセット使用（building-i.obj）
 
+## 2025-06-26
+
+### MVP実装開始（mvp-1ブランチ）
+- TDDアプローチで実装
+- Phase 1: 基本シーン構築とテスト環境
+  - test/ディレクトリ作成
+  - TestRunner.gd作成（テストフレームワーク）
+  - sample_test.gdでテスト出力確認
+  - プロジェクト設定完了（1280x720、モバイル、空色背景）
+  - メインシーン作成（TDD: RED→GREEN）
+  - 3Dカメラ実装（アイソメトリック、正投影）
+  - ライティング実装（DirectionalLight3D、影有効）
+  - 地面実装（CSGBox3D、緑色）
+  - Phase 1完了！全テスト成功
+- Phase 2: GameManagerとコアシステム
+  - GameManagerクラス作成（Autoload登録）
+  - 人口管理システム実装（10秒ごとに1人増加）
+  - 家の生成ロジック実装（3人につき1軒）
+  - _calculate_required_housesメソッド実装
+  - 時間管理システム実装（elapsed_time、time_scale）
+  - GridManagerクラス作成（50x50グリッド）
+  - グリッド占有管理機能実装
+  - Phase 2完了！全テスト成功
+- Phase 3: 家の実装
+  - building-i.objのインポート確認
+  - 家のシーン作成（house.tscn）
+  - MeshInstance3DとStaticBody3D実装
+  - 家の配置システム実装
+  - HouseContainerノード追加
+  - spawn_houseメソッド実装
+  - Phase 3完了！全テスト成功
+- Phase 4: UI実装
+  - UIシーン作成（ui.tscn）
+  - UI.gdスクリプト作成
+  - 人口表示実装
+  - 家の数表示実装
+  - 経過時間表示実装（MM:SS/HH:MM:SS形式）
+  - 時間加速スライダー実装（x1-x100）
+  - メインシーンにUI追加
+  - Phase 4完了！全テスト成功
+
