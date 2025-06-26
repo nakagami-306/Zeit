@@ -4,8 +4,10 @@ extends Node
 
 var population: int = 0
 var house_count: int = 0
+var houses: int = 0  # house_countのエイリアス（テスト用）
 var elapsed_time: float = 0.0
 var time_scale: float = 1.0
+var grid_manager  # GridManagerへの参照
 
 signal house_spawned(position: Vector3)
 
@@ -21,7 +23,7 @@ func _setup_house_container():
 	add_child(container)
 
 func _setup_grid_manager():
-	var grid_manager = preload("res://scripts/GridManager.gd").new()
+	grid_manager = preload("res://scripts/GridManager.gd").new()
 	grid_manager.name = "GridManager"
 	add_child(grid_manager)
 
@@ -44,6 +46,7 @@ func _check_house_requirement():
 	if required_houses > house_count:
 		_spawn_house()
 		house_count += 1
+		houses = house_count  # エイリアスを更新
 		print("House spawned! Total houses: ", house_count)
 
 func _calculate_required_houses(pop: int) -> int:
@@ -53,8 +56,13 @@ func _calculate_required_houses(pop: int) -> int:
 	return (pop - 1) / 3 + 1
 
 func _spawn_house():
-	var grid_manager = get_node("GridManager")
-	var grid_pos = grid_manager.get_random_available_position()
+	# 最初の家は必ず中心に配置
+	var grid_pos: Vector2i
+	if house_count == 0:
+		grid_pos = Vector2i(25, 25)
+	else:
+		# 2軒目以降は最適位置を選択
+		grid_pos = grid_manager.get_best_position()
 	
 	if grid_pos.x >= 0:  # 有効な位置が見つかった
 		# グリッド位置を占有
@@ -67,6 +75,9 @@ func _spawn_house():
 		
 		# 実際に家のインスタンスを生成
 		spawn_house(position)
+		
+		# エリア拡大のチェック
+		grid_manager.check_and_expand_area()
 		
 		house_spawned.emit(position)
 	else:
