@@ -4,7 +4,7 @@ extends Node
 
 func test_spawn_house_uses_best_position():
 	var game_manager = get_node("/root/GameManager")
-	var grid_manager = game_manager.grid_manager
+	var grid_manager = game_manager.get_node("GridManager")
 	
 	# グリッドをリセット
 	grid_manager.occupied_positions.clear()
@@ -20,7 +20,7 @@ func test_spawn_house_uses_best_position():
 
 func test_subsequent_houses_adjacent():
 	var game_manager = get_node("/root/GameManager")
-	var grid_manager = game_manager.grid_manager
+	var grid_manager = game_manager.get_node("GridManager")
 	
 	# グリッドをリセット
 	grid_manager.occupied_positions.clear()
@@ -49,7 +49,7 @@ func test_subsequent_houses_adjacent():
 
 func test_natural_cluster_formation():
 	var game_manager = get_node("/root/GameManager")
-	var grid_manager = game_manager.grid_manager
+	var grid_manager = game_manager.get_node("GridManager")
 	
 	# グリッドをリセット
 	grid_manager.occupied_positions.clear()
@@ -76,7 +76,7 @@ func test_natural_cluster_formation():
 
 func test_respects_residential_area():
 	var game_manager = get_node("/root/GameManager")
-	var grid_manager = game_manager.grid_manager
+	var grid_manager = game_manager.get_node("GridManager")
 	
 	# グリッドをリセット
 	grid_manager.occupied_positions.clear()
@@ -104,7 +104,7 @@ func test_respects_residential_area():
 
 func test_spawn_house_returns_position():
 	var game_manager = get_node("/root/GameManager")
-	var grid_manager = game_manager.grid_manager
+	var grid_manager = game_manager.get_node("GridManager")
 	
 	# グリッドをリセット
 	grid_manager.occupied_positions.clear()
@@ -122,7 +122,7 @@ func test_spawn_house_returns_position():
 
 func test_first_house_special_handling():
 	var game_manager = get_node("/root/GameManager")
-	var grid_manager = game_manager.grid_manager
+	var grid_manager = game_manager.get_node("GridManager")
 	
 	# グリッドをリセット
 	grid_manager.occupied_positions.clear()

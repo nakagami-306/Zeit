@@ -37,8 +37,8 @@ func _update_display():
 	
 	# 経過時間表示
 	var total_seconds = int(game_manager.elapsed_time)
-	var hours = total_seconds / 3600
-	var minutes = (total_seconds % 3600) / 60
+	var hours = int(total_seconds / 3600)
+	var minutes = int((total_seconds % 3600) / 60)
 	var seconds = total_seconds % 60
 	
 	if hours > 0:

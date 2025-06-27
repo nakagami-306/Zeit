@@ -2,8 +2,16 @@ extends Node
 
 # グリッドシステムを管理するクラス
 
+# セルタイプの定義
+enum CellType {
+	EMPTY,
+	HOUSE,
+	ROAD
+}
+
 var grid_size: Vector2i = Vector2i(50, 50)
 var occupied_positions: Dictionary = {}
+var cell_types: Dictionary = {}  # セルタイプを記録
 
 # 円形住宅エリアのプロパティ
 var center_position: Vector2i = Vector2i(25, 25)
@@ -29,10 +37,35 @@ func occupy_position(x: int, y: int):
 	if is_valid_position(x, y):
 		var key = "%d,%d" % [x, y]
 		occupied_positions[key] = true
+		cell_types[key] = CellType.HOUSE
 
 func clear_position(x: int, y: int):
 	var key = "%d,%d" % [x, y]
 	occupied_positions.erase(key)
+	cell_types.erase(key)
+
+func get_cell_type(x: int, y: int) -> CellType:
+	if not is_valid_position(x, y):
+		return CellType.EMPTY
+	
+	var key = "%d,%d" % [x, y]
+	if cell_types.has(key):
+		return cell_types[key]
+	return CellType.EMPTY
+
+func occupy_road(x: int, y: int):
+	if is_valid_position(x, y):
+		var key = "%d,%d" % [x, y]
+		occupied_positions[key] = true
+		cell_types[key] = CellType.ROAD
+
+func is_valid_road_position(x: int, y: int) -> bool:
+	if not is_valid_position(x, y):
+		return false
+	
+	var cell_type = get_cell_type(x, y)
+	# 空き地または既存の道路の上なら配置可能
+	return cell_type == CellType.EMPTY or cell_type == CellType.ROAD
 
 func is_within_residential_area(position: Vector2i) -> bool:
 	# 中心からの距離を計算して、住宅エリア内かどうかを判定
